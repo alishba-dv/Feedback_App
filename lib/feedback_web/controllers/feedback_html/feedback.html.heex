@@ -9,8 +9,47 @@
       <th style="padding: 8px;">Action</th>
 
     </tr>
-   <div style="width: 100%; display: flex; justify-content: flex-end; margin: 20px 0;">
-     
+
+    
+    
+   <div style="width: 100%; display: flex; justify-content: space-between; align-items:center; margin: 20px 0;">
+   <div style="display: flex align-items:center;">
+  
+
+    <label for="search" style="display: block; font-weight: bold;" >First Name:</label>
+
+  <input
+
+    type="text";
+    placeholder="Search.....";
+    name="search";
+
+    style="
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width:400px;"
+
+  />
+ <a 
+  href="/feedback/#{@search}"
+  style="
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 25px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: right;
+    margin: 20px 0;
+    
+  "
+>
+  🔍
+</a>
+
+   </div>
+
 <a 
   href="/feedback/create"
   style="

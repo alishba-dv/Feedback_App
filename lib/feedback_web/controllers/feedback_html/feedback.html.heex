@@ -1,0 +1,89 @@
+<h2 style="text-align: center; color: #1c1513ff; font-weight: bold ; font-size: 30px">User Feedback</h2>
+
+<table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+  <thead style="background-color: #9ea1a9ff;">
+    <tr>
+      <th style="padding: 8px;">Name</th>
+      <th style="padding: 8px;">Email</th>
+      <th style="padding: 8px;">Feedback</th>
+      <th style="padding: 8px;">Action</th>
+
+    </tr>
+   <div style="width: 100%; display: flex; justify-content: flex-end; margin: 20px 0;">
+     
+<a 
+  href="/feedback/create"
+  style="
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: right;
+    margin: 20px 0;
+    
+  "
+>
+  +Create
+</a>
+</div>
+<tr>  </tr>
+
+  </thead>
+  <tbody>
+    <%= for u <- @user do %>
+      <tr>
+        <td style="padding: 8px;border-left: 1px solid #ccc;border-right: 1px solid #ccc;border-top: 1px solid #ccc;"><%= u.fname <>" "<>  u.lname %></td>
+        
+        <td style="padding: 8px;border-left: 1px solid #ccc;border-right: 1px solid #ccc;border-top: 1px solid #ccc;"><%= u.email %></td>
+        <td style="padding: 8px;border-left: 1px solid #ccc;border-right: 1px solid #ccc;border-top: 1px solid #ccc;"><%= u.feedback %></td>
+     <td style="padding: 8px;border-left: 1px solid #ccc;border-right: 1px solid #ccc;border-top: 1px solid #ccc;">
+     <a 
+  href={"/feedback/delete/#{u.id}"}
+  onclick="return confirm('Are you sure you want to delete this feedback?');"
+
+    style="
+    padding: 5px;
+    background-color: #ea1414ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: right;
+    margin: 20px 0;
+    
+  "
+     >
+ Delete
+</a>
+
+  <a 
+  href={"/feedback/edit/#{u.id}"}
+    style="
+    padding: 5px;
+    background-color: #2271c5ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: right;
+    margin: 20px 0;
+    
+  "
+     >
+ Update
+</a>
+
+</td>
+      </tr>
+      
+    <% end %>
+  </tbody>
+</table>

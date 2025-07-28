@@ -2,7 +2,7 @@ defmodule FeedbackWeb.CreateController do
   use FeedbackWeb, :controller
 
   alias Feedback.User
-  alias Feedback.Repo
+  # alias Feedback.Repo
 
   # GET /create
   def create(conn, _params) do

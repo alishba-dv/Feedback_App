@@ -2,20 +2,33 @@ defmodule FeedbackWeb.FeedbackController do
   use FeedbackWeb, :controller
   # import Feedback.Repo
   # import Feedback.User
-  alias Feedback.Accounts.User
+  import Ecto.Query
 
-  def feedback(conn, _params) do
+
+
+
+  def feedback(conn, %{"first_name"=>first_name}) do
     # The home page is often custom made,
     # so skip the default app layout.
-user=Feedback.Repo.all(Feedback.User)
+
+    user = Feedback.Repo.all(from u in Feedback.User, where: ilike(u.fname, ^"%#{first_name}%"))
+IO.puts("This is user we get from searching: ")
+IO.inspect(user)
 
 
     render(conn, :feedback,user: user)
   end
-
-
   ## helps in creation of feedback by a form
+ def feedback(conn, _params) do
+    # The home page is often custom made,
+    # so skip the default app layout.
+    user=Feedback.Repo.all(Feedback.User)
 
+
+
+
+    render(conn, :feedback,user: user)
+  end
 
   def delete(conn, %{"id"=>id}) do
     # The home page is often custom made,

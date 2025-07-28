@@ -20,6 +20,7 @@ defmodule FeedbackWeb.Router do
     get "/", PageController, :home
 
     get "/feedback", FeedbackController, :feedback
+    # get "/feedback/?search", FeedbackController, :search
     get "/feedback/create", CreateController, :create
     post "/submit", SubmitController, :submit
     get "/feedback/greeting" , GreetingController, :greet

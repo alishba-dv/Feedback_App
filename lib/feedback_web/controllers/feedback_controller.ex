@@ -1,38 +1,51 @@
 defmodule FeedbackWeb.FeedbackController do
   use FeedbackWeb, :controller
-  # import Feedback.Repo
-  # import Feedback.User
-  import Ecto.Query
 
 
+  def greet(conn, _params) do
+    # The home page is often custom made,
+    # so skip the default app layout.
+
+    render(conn, :greet, layout: false)
+  end
 
 
   def feedback(conn, %{"first_name"=>first_name}) do
-    # The home page is often custom made,
-    # so skip the default app layout.
 
-    user = Feedback.Repo.all(from u in Feedback.User, where: ilike(u.fname, ^"%#{first_name}%"))
-IO.puts("This is user we get from searching: ")
-IO.inspect(user)
+    # user = Feedback.Repo.all(from u in Feedback.User, where: ilike(u.fname, ^"%#{first_name}%"))
+    #  IO.puts("This is user we get from searching: ")
+    # IO.inspect(user)
+    user=Feedback.Repo.all(Feedback.User)
 
+   user= Enum.filter(user,fn user -> String.downcase(user.fname || "")
+                |> String.contains?(String.downcase(first_name)) end)
 
     render(conn, :feedback,user: user)
-  end
+    end
+
   ## helps in creation of feedback by a form
- def feedback(conn, _params) do
+     def feedback(conn, _params) do
     # The home page is often custom made,
     # so skip the default app layout.
     user=Feedback.Repo.all(Feedback.User)
-
-
-
-
     render(conn, :feedback,user: user)
   end
 
+
+
+  alias Feedback.User
+
+
+   def create(conn, _params) do
+    # changeset = User.changeset(%User{}, %{})
+    # IO.puts("This is params of create function: ")
+    # IO.inspect(params)
+    render(conn, :create)
+  end
+
+
   def delete(conn, %{"id"=>id}) do
-    # The home page is often custom made,
-    # so skip the default app layout.
+
     record = Feedback.Repo.get!(Feedback.User, id)
      case Feedback.Repo.delete(record) do
 
@@ -40,6 +53,12 @@ IO.inspect(user)
         conn
         |> put_flash(:info, "feedback deleted successfully ")
         |>  redirect(to: "/feedback")
+
+      {:error,_deleteData} ->
+
+        conn
+        |> put_flash(:erro, " Error while deleting feedback ")
+        |>redirect(to: "/feedback/")
 
 
      end
@@ -71,7 +90,7 @@ IO.inspect(user)
       |> redirect(to: "/feedback")
 
     {:error, _changeset} ->
-      render(conn, FeedbackController,:update, id: id)
+       render(conn, :edit, id: id)
   end
 end
 

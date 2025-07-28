@@ -1,6 +1,6 @@
 <h2 style="text-align: center; color: #3e7cbaff; font-weight: bold ; font-size: 30px">Submit Feedback</h2>
 
-<form method="post" action="/submit"  onsubmit="checkLength(this.feedback)" style="max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
+<form method="post" action="/submit"   style="max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
   <input 
     type="hidden" 
     name="_csrf_token" 
@@ -47,13 +47,9 @@
       style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; height: 100px;"
       
     >
-     <%= @changeset.params["feedback"] || "" %></textarea>
-      <%= if @changeset.errors[:feedback] do %>
-
-      <p class="text-red-600 tex-sm" ><%= elem(@changeset.errors[:feedback],0)  %></p>
+    </textarea>
 
 
-<%end %>   
   </div>
 
   <div style="text-align: center;">

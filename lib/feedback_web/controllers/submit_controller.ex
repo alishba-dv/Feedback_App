@@ -16,7 +16,9 @@ defmodule FeedbackWeb.SubmitController do
 
     case Repo.insert(changeset) do
       {:ok, _user} ->
-        redirect(conn, to: "/feedback/greeting")
+        conn
+        |> put_flash(:info, "User created successfully")
+        |> redirect(to: "/feedback")
 
       {:error, _changeset} ->
         conn

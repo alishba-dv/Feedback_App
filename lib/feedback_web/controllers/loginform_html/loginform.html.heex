@@ -1,0 +1,37 @@
+<.flash_group flash={@flash} />
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body>
+
+  <div class="signup-container">
+
+
+    <h2 class="form-title">Login</h2>
+
+    <form action="/login" method="post" class="signup-form">
+    <input 
+    type="hidden" 
+    name="_csrf_token" 
+    value={Plug.CSRFProtection.get_csrf_token()} 
+  />
+    
+     
+
+      <label for="email">Email</label>
+      <input required type="email" name="user[email]" id="email" placeholder="Enter your email" required>
+
+      <label for="password">Password</label>
+      <input required  type="password" name="user[password]" id="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</body>
+</html>

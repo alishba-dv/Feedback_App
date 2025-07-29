@@ -3,9 +3,6 @@ defmodule FeedbackWeb.FeedbackController do
 
 
   def greet(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
-
     render(conn, :greet, layout: false)
   end
 
@@ -15,6 +12,7 @@ defmodule FeedbackWeb.FeedbackController do
     # user = Feedback.Repo.all(from u in Feedback.User, where: ilike(u.fname, ^"%#{first_name}%"))
     #  IO.puts("This is user we get from searching: ")
     # IO.inspect(user)
+
     user=Feedback.Repo.all(Feedback.User)
 
    user= Enum.filter(user,fn user -> String.downcase(user.fname || "")
@@ -25,21 +23,17 @@ defmodule FeedbackWeb.FeedbackController do
 
   ## helps in creation of feedback by a form
      def feedback(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
+
     user=Feedback.Repo.all(Feedback.User)
     render(conn, :feedback,user: user)
   end
 
 
 
-  alias Feedback.User
 
 
    def create(conn, _params) do
-    # changeset = User.changeset(%User{}, %{})
-    # IO.puts("This is params of create function: ")
-    # IO.inspect(params)
+  
     render(conn, :create)
   end
 
@@ -81,9 +75,9 @@ defmodule FeedbackWeb.FeedbackController do
    def update(conn, %{"id" => id, "feedback" => feedback_params}) do
   feedback = Feedback.Repo.get!(Feedback.User, id)
 
-  _changeset = Feedback.User.changeset(feedback, feedback_params)
+  changeset = Feedback.User.changeset(feedback, feedback_params)
 
-  case Feedback.Repo.update(_changeset) do
+  case Feedback.Repo.update(changeset) do
     {:ok, _updated_feedback} ->
       conn
       |> put_flash(:info, "Feedback updated successfully.")

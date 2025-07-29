@@ -28,5 +28,4 @@ defmodule FeedbackWeb.SubmitController do
   end
 end
 
-
 end

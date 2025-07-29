@@ -26,13 +26,14 @@ defmodule FeedbackWeb.Router do
     get "/feedback/delete/:id" ,FeedbackController, :delete
     get "/feedback/edit/:id" ,FeedbackController, :edit
     post "/feedback/update/:id" ,FeedbackController, :update
+    get  "/signup" , SignUpController, :signup
+    post "/signup" , SignUpController, :signupuser
+    get  "/login", LoginFormController, :loginform
+    post  "/login", LoginFormController, :loginuser
 
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", FeedbackWeb do
-  #   pipe_through :api
-  # end
+
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:feedback, :dev_routes) do

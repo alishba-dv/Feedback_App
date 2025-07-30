@@ -21,10 +21,6 @@ defmodule FeedbackWeb.SignUpController do
   "email" => email,
   "password" => hashedpassword
 }
-
-
-
-
     changeset=UserData.changeset(%UserData{},user)
 
     case Repo.insert(changeset) do
@@ -39,14 +35,7 @@ defmodule FeedbackWeb.SignUpController do
             |>put_flash(:error,"Error Signup: ")
             |> redirect(to: "/signup")
 
-
-
     end
-
-
-
-
-
 
     render(conn,:signupuser,layout: false)
   end

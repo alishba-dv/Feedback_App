@@ -5,34 +5,106 @@
 <head>
   <meta charset="UTF-8">
   <title>Sign Up</title>
-  <link rel="stylesheet" href="/assets/style.css">
 </head>
+<body style="
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+">
 
-<body>
+<section style="
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+">
+  <div style="
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 50px;
+  ">
 
-  <div class="signup-container">
+    <h2 style="
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 30px;
+      color: #333;
+      font-weight: bold;
+    ">
+      Sign Up
+    </h2>
 
+    <form action="/signup" method="post" style="
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+    ">
+      <input 
+        type="hidden" 
+        name="_csrf_token" 
+        value={Plug.CSRFProtection.get_csrf_token()}
+      />
+      
+      <label for="name" style="margin-bottom: 6px; font-weight: bold; font-size: 14px;">
+        Name
+      </label>
+      <input required type="text" name="user[name]" id="name" placeholder="Enter your name" style="
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+      ">
 
-    <h2 class="form-title">Sign Up</h2>
+      <label for="email" style="margin-bottom: 6px; font-weight: bold; font-size: 14px;">
+        Email
+      </label>
+      <input required type="email" name="user[email]" id="email" placeholder="Enter your email" style="
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+      ">
 
-    <form action="/signup" method="post" class="signup-form">
-    <input 
-    type="hidden" 
-    name="_csrf_token" 
-    value={Plug.CSRFProtection.get_csrf_token()} 
-  />
-    
-      <label for="name">Name</label>
-      <input required type="text" name="user[name]" id="name" placeholder="Enter your name" required>
+      <label for="password" style="margin-bottom: 6px; font-weight: bold; font-size: 14px;">
+        Password
+      </label>
+      <input required minlength="5" type="password" name="user[password]" id="password" placeholder="Enter your password" style="
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+      ">
 
-      <label for="email">Email</label>
-      <input required type="email" name="user[email]" id="email" placeholder="Enter your email" required>
-
-      <label for="password">Password</label>
-      <input required  minlength="5" type="password" name="user[password]" id="password" placeholder="Enter your password" required>
-
-      <button type="submit">Sign Up</button>
+      <button type="submit" style="
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+      ">
+        Sign Up
+      </button>
     </form>
+    <p style="margin-top: 20px; text-align: center; font-size: 14px;">
+        Already have an account?
+        <a href="/login" style="color: #007BFF; text-decoration: none;">Login here</a>
+      </p>
+
   </div>
+</section>
 </body>
 </html>

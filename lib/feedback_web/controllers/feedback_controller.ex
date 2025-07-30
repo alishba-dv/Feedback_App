@@ -29,11 +29,19 @@ defmodule FeedbackWeb.FeedbackController do
   end
 
 
+  def about(conn,_params) do
+    render(conn,:about,layout: false)
+
+  end
 
 
+def contact(conn,_params) do
+    render(conn,:contact,layout: false)
+
+  end
 
    def create(conn, _params) do
-  
+
     render(conn, :create)
   end
 

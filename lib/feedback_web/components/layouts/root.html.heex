@@ -1,17 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" class="[scrollbar-gutter:stable]">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title default="Feedback" suffix=" · Phoenix Framework">
-      {assigns[:page_title]}
-    </.live_title>
-    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
-    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
-  <body class="bg-white">
-    {@inner_content}
+
+  <body class="bg-white" style="font-family: Inter, 'Noto Sans', sans-serif;">
+    <div class="relative flex min-h-screen flex-col bg-slate-50 overflow-x-hidden">
+      <!-- Header -->
+      <header class="flex items-center justify-between border-b px-10 py-3 bg-white">
+        <div class="flex items-center gap-4 text-[#0d141c]">
+          <div class="w-6 h-6">
+            <!-- Logo Icon -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold">Inquora</h2>
+        </div>
+
+        <div class="flex items-center gap-8">
+          <nav class="flex gap-6">
+            <a class="text-[#0d141c] text-lg font-medium" href="/">Home</a>
+            <a class="text-[#0d141c] text-lg font-medium" href="/about">About Us</a>
+            <a class="text-[#0d141c] text-lg font-medium" href="/contact">Contact</a>
+          </nav>
+          <div class="flex gap-2">
+            <a href="/signup">
+              <button class="h-10 px-4 bg-[#0c7ff2] text-white font-bold rounded-lg">Sign Up</button>
+            </a>
+            <a href="/login">
+              <button class="h-10 px-4 bg-[#e7edf4] text-[#0d141c] font-bold rounded-lg">Login</button>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page content -->
+      <body>
+      {@inner_content}
+      </body>
+
+      <!-- Footer -->
+      <footer class="bg-white border-t mt-auto">
+        <div class="max-w-4xl mx-auto py-10 px-5 text-center text-sm text-[#4e7097]">
+          <div class="flex flex-wrap justify-center gap-6 mb-4">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact Us</a>
+          </div>
+          <p>@2024 Inquora. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

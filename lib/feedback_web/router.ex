@@ -30,6 +30,8 @@ defmodule FeedbackWeb.Router do
     post "/signup" , SignUpController, :signupuser
     get  "/login", LoginFormController, :loginform
     post  "/login", LoginFormController, :loginuser
+    get "/about" , FeedbackController, :about
+    get "/contact",FeedbackController, :contact
 
   end
 

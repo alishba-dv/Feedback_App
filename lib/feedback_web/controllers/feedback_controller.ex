@@ -6,6 +6,19 @@ defmodule FeedbackWeb.FeedbackController do
     render(conn, :greet, layout: false)
   end
 
+# def handle_event("search", %{"first_name" => first_name}, socket) do
+#   users =
+#     User
+#     |> Repo.all()
+#     |> Enum.filter(fn user ->
+#       String.downcase(user.fname || "")
+#       |> String.contains?(String.downcase(first_name))
+#     end)
+
+#   {:noreply, assign(socket, first_name: first_name, users: users)}
+# end
+
+
 
   def feedback(conn, %{"first_name"=>first_name}) do
 
@@ -18,14 +31,14 @@ defmodule FeedbackWeb.FeedbackController do
    user= Enum.filter(user,fn user -> String.downcase(user.fname || "")
                 |> String.contains?(String.downcase(first_name)) end)
 
-    render(conn, :feedback,user: user)
+    render(conn, :feedback,user: user, first_name: first_name || "")
     end
 
   ## helps in creation of feedback by a form
      def feedback(conn, _params) do
 
     user=Feedback.Repo.all(Feedback.User)
-    render(conn, :feedback,user: user)
+    render(conn, :feedback,user: user, first_name: "")
   end
 
 

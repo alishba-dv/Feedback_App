@@ -32,7 +32,7 @@ defmodule FeedbackWeb.Router do
     post  "/login", LoginFormController, :loginuser
     get "/about" , FeedbackController, :about
     get "/contact",FeedbackController, :contact
-
+    post "/feedback" , FeedbackController, :feedback
   end
 
 

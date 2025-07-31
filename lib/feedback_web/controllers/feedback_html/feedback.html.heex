@@ -1,4 +1,5 @@
 <.flash_group flash={@flash} />
+<meta name="csrf-token" content={get_csrf_token()} />
 
 <h2 style="
   text-align: center; 
@@ -19,21 +20,29 @@
   margin-bottom: 20px;
 ">
   <!-- Search -->
-  <form action="/feedback/?search" method="get" style="width: 30%; margin: 20px auto; display: flex; align-items: center;">
+<form action="/feedback" method="post" style="width: 30%; margin: 20px auto; display: flex; align-items: center;" >
+    <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
+
     <label for="search" style="font-weight: bold; margin-right: 10px;">First Name:</label>
-    <input
-      type="text"
-      name="first_name"
-      placeholder="Search..."
-      style="
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        padding: 8px 12px;
-        width: 300px;
-        font-size: 14px;
-        margin-right: 8px;
-      "
-    />
+   <input
+   oninput="this.form.submit()"
+
+    name="first_name"
+    id="first_name"
+    placeholder="Search..."
+    value={@first_name || ""}
+    style="
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 8px 12px;
+      width: 300px;
+      font-size: 14px;
+      margin-right: 8px;
+    "
+  />
+
+
+
     <button type="submit" style="
       padding: 8px 12px;
       background-color: #4169e1;
@@ -78,7 +87,15 @@
       <th style="padding: 12px; border: 1px solid #ddd;">Action</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="table">
+  <%= if Enum.empty?(@user) do %>
+  <tr>
+    <td colspan="5" style="text-align: center; padding: 10px;">
+      No user found.
+    </td>
+  </tr>
+<% else %>
+
     <%= for u <- @user do %>
       <tr style="background-color: #fdfdfd; transition: background-color 0.2s;"width="50px" onmouseover="this.style.backgroundColor='#f1f1f1'" onmouseout="this.style.backgroundColor='#fdfdfd'">
         <td style="width: 200px; padding: 10px; border: 1px solid #ddd;"><%= u.fname <> " " <> u.lname %></td>
@@ -117,5 +134,30 @@
         </td>
       </tr>
     <% end %>
+    <%end %>
   </tbody>
 </table>
+
+<%!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("first_name");
+      const feedbackList = document.getElementById("table");
+      let timeoutId;
+      searchInput.addEventListener("input", function () {
+        clearTimeout(timeoutId);
+        const query = searchInput.value.trim();
+        timeoutId = setTimeout(() => {
+          fetch(`/feedbacks?search=${encodeURIComponent(query)}`)
+            .then(response => response.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, "text/html");
+              const newList = doc.getElementById("feedback-list");
+              if (newList) {
+                feedbackList.innerHTML = newList.innerHTML;
+              }
+            });
+        }, 1);
+      });
+    });
+  </script> --%>

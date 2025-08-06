@@ -98,7 +98,8 @@
 
     <%= for u <- @user do %>
       <tr style="background-color: #fdfdfd; transition: background-color 0.2s;"width="50px" onmouseover="this.style.backgroundColor='#f1f1f1'" onmouseout="this.style.backgroundColor='#fdfdfd'">
-        <td style="width: 200px; padding: 10px; border: 1px solid #ddd;"><%= u.fname <> " " <> u.lname %></td>
+        <td style="width: 200px; padding: 10px; border: 1px solid #ddd;"><%= (u.fname || "") <> " " <> (u.lname || "") %>
+</td>
         <td style="width: 200px; padding: 10px; border: 1px solid #ddd;"><%= u.email %></td>
         <td style="width: 200px; padding: 10px; border: 1px solid #ddd;"><%= u.feedback %></td>
         <td style="width: 200px; padding: 10px; border: 1px solid #ddd;">

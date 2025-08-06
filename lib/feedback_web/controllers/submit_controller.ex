@@ -24,7 +24,8 @@ defmodule FeedbackWeb.SubmitController do
         conn
         |> put_flash(:error, "Something went wrong. Please check your input.")
         |> redirect(to: "/feedback/create")
-    end
+
+      end
   end
 end
 

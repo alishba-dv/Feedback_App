@@ -50,14 +50,16 @@
     ">
       <input 
         type="hidden" 
-        name="_csrf_token" 
+        name="_csrf_token"       
         value={Plug.CSRFProtection.get_csrf_token()}
       />
       
       <label for="name" style="margin-bottom: 6px; font-weight: bold; font-size: 14px;">
         Name
       </label>
-      <input required type="text" name="user[name]" id="name" placeholder="Enter your name" style="
+
+      <input value={@changeset.changes[:name] || @changeset.data.name || ""}
+       type="text" name="user[name]" id="name" placeholder="Enter your name" style="
         padding: 10px;
         margin-bottom: 15px;
         border: 1px solid #ccc;
@@ -68,25 +70,60 @@
       <label for="email" style="margin-bottom: 6px; font-weight: bold; font-size: 14px;">
         Email
       </label>
-      <input required type="email" name="user[email]" id="email" placeholder="Enter your email" style="
+      <input value={@changeset.changes[:email] || @changeset.data.name || ""}  type="email" name="user[email]" id="email" placeholder="Enter your email" style="
         padding: 10px;
         margin-bottom: 15px;
         border: 1px solid #ccc;
         border-radius: 6px;
         font-size: 14px;
       ">
+<%= if @changeset.action && @changeset.errors[:email] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:email], 0) %></p>
+    <% end %>
 
+    
       <label for="password" style="margin-bottom: 6px; font-weight: bold; font-size: 14px;">
-        Password
-      </label>
-      <input required minlength="5" type="password" name="user[password]" id="password" placeholder="Enter your password" style="
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 14px;
-      ">
+  Password
+</label>
+<div style="position: relative;">
+  <input id="password" type="password" />
 
+  <!-- Eye Icon Button -->
+  <button type="button" onclick="togglePassword()" style="
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  ">
+    <span id="eye-icon">👁️</span>
+  </button>
+</div>
+
+<script>
+  function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const eyeIcon = document.getElementById("eye-icon");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      eyeIcon.textContent = "🙈"; // Eye closed
+    } else {
+      passwordInput.type = "password";
+      eyeIcon.textContent = "👁️"; // Eye open
+    }
+  }
+</script>
+
+ 
+
+      
+<%= if @changeset.action && @changeset.errors[:password] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:password], 0) %></p>
+    <% end %>
       <button type="submit" style="
         padding: 10px;
         background-color: #007BFF;

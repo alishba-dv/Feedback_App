@@ -5,6 +5,7 @@ defmodule FeedbackWeb.SignUpHTML do
   See the `page_html` directory for all templates available.
   """
   use FeedbackWeb, :html
+  import Phoenix.HTML.Form
 
   embed_templates "signup_html/*"
 end

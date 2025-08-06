@@ -1,0 +1,77 @@
+<.flash_group flash={@flash} />
+
+<h2 style="text-align: center; color: #3e7cbaff; font-weight: bold ; font-size: 30px">Submit Feedback</h2>
+
+<form method="post" action="/submitnew" style="max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
+  <input  type="hidden" name="_csrf_token" value={Plug.CSRFProtection.get_csrf_token()} />
+
+  <div style="margin-bottom: 15px;">
+    <label for="fname" style="display: block; font-weight: bold;">First Name:</label>
+    <input value={@changeset.changes[:fname] || @changeset.data.fname || ""} type="text" name="newfeedback[fname]" id="fname" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;" />
+    <%=  if @changeset.action && @changeset.errors[:fname] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:fname], 0) %></p>
+    <% end %>
+
+    <label for="lname" style="display: block; font-weight: bold;">Last Name:</label>
+    <input value={@changeset.changes[:lname] || @changeset.data.lname || ""} type="text" name="newfeedback[lname]" id="lname" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;" />
+    <%=  if @changeset.action && @changeset.errors[:lname] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:lname], 0) %></p>
+    <% end %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <label for="email" style="display: block; font-weight: bold;">Email:</label>
+    <input value={@changeset.changes[:email] || @changeset.data.email || ""} name="newfeedback[email]" id="email" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;" />
+    <%=  if @changeset.action && @changeset.errors[:email] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:email], 0) %></p>
+    <% end %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <label for="age" style="display: block; font-weight: bold;">Age:</label>
+    <input value={@changeset.changes[:age] || @changeset.data.age || ""} name="newfeedback[age]" id="age" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;" />
+    <%=  if @changeset.action && @changeset.errors[:age] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:age], 0) %></p>
+    <% end %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <label for="phone" style="display: block; font-weight: bold;">Phone#:</label>
+    <input value={@changeset.changes[:phone] || @changeset.data.phone || ""} name="newfeedback[phone]" id="phone" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;" />
+    <%=  if @changeset.action && @changeset.errors[:phone] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:phone], 0) %></p>
+    <% end %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <label for="feedback" style="display: block; font-weight: bold;">Feedback:</label>
+    <textarea
+      minlength="10"
+      
+      name="newfeedback[feedback]"
+      id="feedback"
+      style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; height: 100px;"
+    ><%= @changeset.changes[:feedback] || @changeset.data.feedback || "" %>
+</textarea>
+    <%= if @changeset.action && @changeset.errors[:feedback] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:feedback], 0) %></p>
+    <% end %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <label for="status" style="display: block; font-weight: bold;">Status:</label>
+    <input value={@changeset.changes[:status] || @changeset.data.status || ""}  type="text" name="newfeedback[status]" id="status" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;" />
+    <%= if @changeset.action && @changeset.errors[:status] do %>
+      <p style="color:red;"><%= elem(@changeset.errors[:status], 0) %></p>
+    <% end %>
+  </div>
+
+  <div style="text-align: center;">
+    <button
+      type="submit"
+      style="padding: 10px 20px; background-color: #4A90E2; color: white; border: none; border-radius: 5px; cursor: pointer;"
+    >
+      Submit
+    </button>
+  </div>
+</form>

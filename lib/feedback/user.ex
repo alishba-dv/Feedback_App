@@ -8,6 +8,8 @@ defmodule Feedback.User do
     field :fname, :string
     field :lname, :string
 
+    ## here is an association --> a feedback must belongs to a user
+
     timestamps(type: :utc_datetime)
   end
 
@@ -16,6 +18,12 @@ defmodule Feedback.User do
     user
     |> cast(attrs, [:fname, :lname, :email, :feedback])
     |> validate_required([:fname, :lname, :email])
+    #     |> unique_constraint(:email)
 
+    # |>validate_length(:password,min: 8,message: "Password must be 8 characters long")
+    # |>validate_format(:password,~r/[A-Z]/,message: "Password must contain at least one upper case character")
+    # |>validate_format(:password,~r/[a-z]/,message: "Password must contain at least one lower case character")
+    # |>validate_format(:password,~r/\d/,message: "Password must contain at least one digit")
+    # |>validate_format(:password,~r/[!@#$%&*]/,message: "Password must contain at least one special character")
   end
 end

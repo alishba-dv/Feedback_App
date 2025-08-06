@@ -1,6 +1,7 @@
 defmodule FeedbackWeb.FeedbackController do
   use FeedbackWeb, :controller
-
+  alias Feedback.NewFeedback
+  alias Feedback.Repo
 
   def greet(conn, _params) do
     render(conn, :greet, layout: false)
@@ -42,6 +43,42 @@ defmodule FeedbackWeb.FeedbackController do
   end
 
 
+  def newfeedback(conn,_params) do
+
+  changeset = Feedback.NewFeedback.changeset(%Feedback.NewFeedback{}, %{})
+  render(conn, :newfeedback, changeset: changeset)
+
+  end
+
+ def submitnew(conn,%{"newfeedback" => feedback_params})do
+
+    IO.puts("What we go from user: ")
+    IO.inspect(feedback_params)
+
+    feedback_text = feedback_params["feedback"] || ""
+
+  if String.length(feedback_text) > 255 do
+    conn
+    |> put_flash(:error, "Feedback must be under 255 characters.")
+    |> redirect(to: "/feedbackNewForm")
+  else
+    changeset = NewFeedback.changeset(%NewFeedback{}, feedback_params)
+
+    case Repo.insert(changeset) do
+      {:ok, _newfeedback} ->
+        conn
+        |> put_flash(:info, "User created successfully")
+        |> redirect(to: "/feedback")
+        # render(:newfeedback, changeset: changeset)
+
+{:error, changeset} ->
+  # render(conn,:newfeedback, changeset: changeset)
+    render(conn, :newfeedback, changeset: %{changeset | action: :insert})
+
+
+    end
+  end
+end
   def about(conn,_params) do
     render(conn,:about,layout: false)
 

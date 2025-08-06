@@ -33,6 +33,8 @@ defmodule FeedbackWeb.Router do
     get "/about" , FeedbackController, :about
     get "/contact",FeedbackController, :contact
     post "/feedback" , FeedbackController, :feedback
+    post "/submitnew",FeedbackController,:submitnew
+    get "/feedbackNewForm", FeedbackController, :newfeedback
   end
 
 

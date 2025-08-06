@@ -1,10 +1,7 @@
 defmodule FeedbackWeb.FeedbackHTML do
-  @moduledoc """
-  This module contains pages rendered by PageController.
-
-  See the `page_html` directory for all templates available.
-  """
   use FeedbackWeb, :html
+
+  import Phoenix.HTML.Form
 
   embed_templates "feedback_html/*"
 end

@@ -13,9 +13,7 @@ import Ecto.Query
 
   def feedback(conn, %{"first_name"=>first_name}) do
 
-    # user = Feedback.Repo.all(from u in Feedback.User, where: ilike(u.fname, ^"%#{first_name}%"))
-    #  IO.puts("This is user we get from searching: ")
-    # IO.inspect(user)
+
 
     user=Feedback.Repo.all(Feedback.User)
 
@@ -27,6 +25,12 @@ import Ecto.Query
 
   ## helps in creation of feedback by a form
      def feedback(conn, _params) do
+
+      user_id=get_session(conn,:user_id)
+
+      if(user_id==nil) do
+          render(conn,:loginrequired,message: "You must be logged in to view feedbacks")
+      end
 
     user=Feedback.Repo.all(Feedback.User)
     render(conn, :feedback,user: user, first_name: "")
@@ -83,7 +87,7 @@ def contact(conn,_params) do
    def create(conn, _params) do
     user_id=get_session(conn,:user_id)
       if(user_id==nil) do
-          render(conn,:loginrequired,layout: false)
+          render(conn,:loginrequired,message: "You must be logged in to create a  feedback")
       end
 
     render(conn, :create)

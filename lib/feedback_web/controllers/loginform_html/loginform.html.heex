@@ -67,16 +67,50 @@
         font-size: 14px;
       ">
 
-      <label for="password" style="margin-bottom: 6px; font-weight: bold; font-size: 14px;">
-        Password
-      </label>
-      <input required minlength="5" type="password" name="user[password]" id="password" placeholder="Enter your password" style="
-        padding: 10px;
+     <label for="password" style="    margin-bottom: 6px; font-weight: bold; font-size: 14px;">
+  Password
+</label>
+<div style="position: relative;">
+  <input name="user[password]" id="password" type="password" style="padding: 10px;
         margin-bottom: 15px;
+        width: 100%;
+            padding: 10px 40px 10px 10px;
+    box-sizing: border-box;
+
         border: 1px solid #ccc;
         border-radius: 6px;
-        font-size: 14px;
-      ">
+        font-size: 14px;" />
+
+  <!-- Eye Icon Button -->
+  <button type="button" onclick="togglePassword()" style="
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    
+  ">
+   👁️
+  </button>
+</div>
+
+<script>
+  function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const eyeIcon = document.getElementById("eye-icon");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      eyeIcon.textContent = "/"; // Eye closed
+    } else {
+      passwordInput.type = "password";
+      eyeIcon.textContent = "👁️"; // Eye open
+    }
+  }
+</script> 
 
       <button type="submit" style="
         padding: 10px;

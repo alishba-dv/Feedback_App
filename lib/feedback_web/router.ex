@@ -37,7 +37,8 @@ defmodule FeedbackWeb.Router do
     get "/feedbackNewForm", FeedbackController, :newfeedback
     get "/userfeedback",FeedbackController, :userfeedback
     get "/feedback/:id",FeedbackController, :getfeedbackbyid
-
+    get "/loginrequired", FeedbackController, :loginrequired
+    get "/logout", LoginFormController, :logout
   end
 
 

@@ -2,6 +2,7 @@ defmodule FeedbackWeb.FeedbackController do
   use FeedbackWeb, :controller
   alias Feedback.NewFeedback
   alias Feedback.Repo
+import Ecto.Query
 
   def greet(conn, _params) do
     render(conn, :greet, layout: false)
@@ -80,8 +81,10 @@ def contact(conn,_params) do
   end
 
    def create(conn, _params) do
-
-    
+    user_id=get_session(conn,:user_id)
+      if(user_id==nil) do
+          render(conn,:loginrequired,layout: false)
+      end
 
     render(conn, :create)
   end
@@ -126,14 +129,30 @@ def userfeedback(conn, _params) do
   end
 def getfeedbackbyid(conn,%{"id" => id}) do
 
-  feedback = Feedback.Repo.get!(Feedback.User, id)
-IO.puts("Feedback got from id:::")
+  # feedback = Feedback.Repo.get!(Feedback.User, "user_id" => id)
+
+feedback =
+    from(f in Feedback.User, where: f.user_id == ^id)
+    |> Feedback.Repo.all()
+
+    IO.puts("Feedback got from id:::")
   IO.inspect(feedback)
       user=Feedback.Repo.all(Feedback.User)
 
 
   render(conn,:getfeedbackbyid,user: user,feedback: List.wrap(feedback), first_name: "")
 
+
+end
+
+
+
+
+def loginrequired(conn,_params) do
+
+
+
+  render(conn,:loginrequired,layout: false)
 
 end
 

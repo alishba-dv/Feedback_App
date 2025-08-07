@@ -6,6 +6,12 @@ defmodule FeedbackWeb.SubmitController do
 
   def submit(conn, %{"feedback" => feedback_params}) do
   feedback_text = feedback_params["feedback"] || ""
+  user_id = get_session(conn, :user_id) # Or from params, or conn.assigns.current_user.id
+
+  IO.puts("Session id we got: ")
+  IO.puts(user_id)
+  feedback_params = Map.put(feedback_params, "user_id", user_id)
+
 
   if String.length(feedback_text) > 255 do
     conn

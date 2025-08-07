@@ -3,8 +3,19 @@ defmodule FeedbackWeb.LoginFormController do
 
   alias Feedback.Repo
   alias Feedback.UserData
+def logout(conn,_params) do
 
+   conn
+  |> delete_session(:user_id)
+  |>put_flash(:info,"Logout successfully ")
+  |> redirect(to: "/login")
+
+
+end
     def loginform(conn,_params) do
+
+      user_id=get_session(conn,:user_id)
+
 
       render(conn,:loginform,layout: false)
 
@@ -29,10 +40,13 @@ defmodule FeedbackWeb.LoginFormController do
   else
     matched_user = hd(matched_users)
     IO.puts("This is matched_user:: ")
-    IO.inspect(matched_user)
+    IO.puts(matched_user.id)
 
    if Bcrypt.verify_pass(password, matched_user.password) do
+
       conn
+      |> put_session(:user_id, matched_user.id)
+
       |> put_flash(:info, "Login Successful")
       |> redirect(to: "/feedback")
     else

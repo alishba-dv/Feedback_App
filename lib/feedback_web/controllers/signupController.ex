@@ -37,3 +37,10 @@ defmodule FeedbackWeb.SignUpController do
     end
   end
 end
+defmodule Feedback.Repo.Migrations.AddUserIdToUsers do
+  use Ecto.Migration
+
+  def change do
+
+  end
+end

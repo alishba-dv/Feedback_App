@@ -7,13 +7,15 @@ defmodule Feedback.UserData do
     field :name, :string
     field :password, :string
 
+    has_many :users, Feedback.User
+
     timestamps(type: :utc_datetime)
   end
 
   @doc false
   def changeset(user_data, attrs) do
     user_data
-    |> cast(attrs, [:name, :password, :email])
+    |> cast(attrs, [:name, :password, :email,])
     |> validate_required([:name, :password, :email])
     |> unique_constraint(:email, message: "Email already taken")
 

@@ -35,6 +35,9 @@ defmodule FeedbackWeb.Router do
     post "/feedback" , FeedbackController, :feedback
     post "/submitnew",FeedbackController,:submitnew
     get "/feedbackNewForm", FeedbackController, :newfeedback
+    get "/userfeedback",FeedbackController, :userfeedback
+    get "/feedback/:id",FeedbackController, :getfeedbackbyid
+
   end
 
 

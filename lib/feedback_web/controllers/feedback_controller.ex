@@ -7,17 +7,6 @@ defmodule FeedbackWeb.FeedbackController do
     render(conn, :greet, layout: false)
   end
 
-# def handle_event("search", %{"first_name" => first_name}, socket) do
-#   users =
-#     User
-#     |> Repo.all()
-#     |> Enum.filter(fn user ->
-#       String.downcase(user.fname || "")
-#       |> String.contains?(String.downcase(first_name))
-#     end)
-
-#   {:noreply, assign(socket, first_name: first_name, users: users)}
-# end
 
 
 
@@ -92,6 +81,8 @@ def contact(conn,_params) do
 
    def create(conn, _params) do
 
+    
+
     render(conn, :create)
   end
 
@@ -128,7 +119,23 @@ def contact(conn,_params) do
 
   end
 
+def userfeedback(conn, _params) do
 
+    user=Feedback.Repo.all(Feedback.User)
+    render(conn, :userfeedback,user: user, first_name: "")
+  end
+def getfeedbackbyid(conn,%{"id" => id}) do
+
+  feedback = Feedback.Repo.get!(Feedback.User, id)
+IO.puts("Feedback got from id:::")
+  IO.inspect(feedback)
+      user=Feedback.Repo.all(Feedback.User)
+
+
+  render(conn,:getfeedbackbyid,user: user,feedback: List.wrap(feedback), first_name: "")
+
+
+end
 
    def update(conn, %{"id" => id, "feedback" => feedback_params}) do
   feedback = Feedback.Repo.get!(Feedback.User, id)
@@ -145,6 +152,7 @@ def contact(conn,_params) do
        render(conn, :edit, id: id)
   end
 end
+
 
 
 

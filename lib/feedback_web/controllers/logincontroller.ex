@@ -28,6 +28,8 @@ defmodule FeedbackWeb.LoginFormController do
     |> redirect(to: "/login")
   else
     matched_user = hd(matched_users)
+    IO.puts("This is matched_user:: ")
+    IO.inspect(matched_user)
 
    if Bcrypt.verify_pass(password, matched_user.password) do
       conn

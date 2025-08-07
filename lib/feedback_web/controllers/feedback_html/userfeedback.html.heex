@@ -1,0 +1,165 @@
+<.flash_group flash={@flash} />
+<meta name="csrf-token" content={get_csrf_token()} />
+
+<h2 style="
+  text-align: center; 
+  color: #1c1513ff; 
+  font-weight: bold; 
+  font-size: 32px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+">User Feedback</h2>
+
+<!-- Search & Create Section -->
+<div style="
+  width: 100%; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 0 20px; 
+  margin-bottom: 20px;
+">
+  <!-- Search -->
+<form action="/feedback" method="post" style="width: 30%; margin: 20px auto; display: flex; align-items: center;" >
+    <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
+
+    <label for="search" style="font-weight: bold; margin-right: 10px;">First Name:</label>
+   <input
+   oninput="this.form.submit()"
+
+    name="first_name"
+    id="first_name"
+    placeholder="Search..."
+    value={@first_name || ""}
+    style="
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 8px 12px;
+      width: 300px;
+      font-size: 14px;
+      margin-right: 8px;
+    "
+  />
+
+
+
+    <button type="submit" style="
+      padding: 8px 12px;
+      background-color: #4169e1;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    ">🔍</button>
+
+    <br>
+      <a 
+    href="/feedback/create"
+    style="
+    
+      padding: 10px 18px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 50px;
+    "
+  >
+    + Create
+  </a>
+
+  </form>
+
+  <!-- Create Button -->
+</div>
+
+<!-- Table -->
+<table style="width: 50%; margin: 50px auto;">
+  <thead>
+    <tr style="background-color: #4379acff; color: white;">
+      <th style="padding: 12px; border: 1px solid #ddd;">Name</th>
+      <th style="padding: 12px; border: 1px solid #ddd;">Email</th>
+      <%!-- <th style="padding: 12px; border: 1px solid #ddd;">Feedback</th> --%>
+      <th style="padding: 12px; border: 1px solid #ddd;">Action</th>
+    </tr>
+  </thead>
+  <tbody id="table">
+  <%= if Enum.empty?(@user) do %>
+  <tr>
+    <td colspan="5" style="text-align: center; padding: 10px;">
+      No user found.
+    </td>
+  </tr>
+<% else %>
+
+    <%= for u <- @user do %>
+      <tr style="background-color: #fdfdfd; transition: background-color 0.2s;"width="50px" onmouseover="this.style.backgroundColor='#f1f1f1'" onmouseout="this.style.backgroundColor='#fdfdfd'">
+       
+        <td onclick={"window.location='/feedback/#{u.id}'"}  style="width: 200px; padding: 10px; border: 1px solid #ddd;"><%= (u.fname || "") <> " " <> (u.lname || "") %>
+</td>        
+        <td style="width: 200px; padding: 10px; border: 1px solid #ddd;"><%= u.email %></td>
+        <%!-- <td style="width: 200px; padding: 10px; border: 1px solid #ddd;"><%= u.feedback %></td> --%>
+        <td style="width: 200px; padding: 10px; border: 1px solid #ddd;">
+          <!-- feedback create Button -->
+          <a 
+            href={"/feedback/create"}
+            style="
+              padding: 6px 10px;
+              background-color: #dc3545;
+              color: white;
+              border-radius: 4px;
+              font-size: 13px;
+              font-weight: bold;
+              text-decoration: none;
+              margin-right: 6px;
+              align: center;
+              "
+          >Feedback</a>
+
+          <!-- Update Button -->
+          <%!-- <a 
+            href={"/feedback/edit/#{u.id}"}
+            style="
+              padding: 6px 10px;
+              background-color: #007bff;
+              color: white;
+              border-radius: 4px;
+              font-size: 13px;
+              font-weight: bold;
+              text-decoration: none;
+            "
+          >Update</a> --%>
+        </td>
+      </tr>
+    <% end %>
+    <%end %>
+  </tbody>
+</table>
+
+<%!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("first_name");
+      const feedbackList = document.getElementById("table");
+      let timeoutId;
+      searchInput.addEventListener("input", function () {
+        clearTimeout(timeoutId);
+        const query = searchInput.value.trim();
+        timeoutId = setTimeout(() => {
+          fetch(`/feedbacks?search=${encodeURIComponent(query)}`)
+            .then(response => response.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, "text/html");
+              const newList = doc.getElementById("feedback-list");
+              if (newList) {
+                feedbackList.innerHTML = newList.innerHTML;
+              }
+            });
+        }, 1);
+      });
+    });
+  </script> --%>

@@ -8,6 +8,7 @@ defmodule FeedbackWeb.Layouts do
   layout on both `use FeedbackWeb, :controller` and
   `use FeedbackWeb, :live_view`.
   """
+
   use FeedbackWeb, :html
 
   embed_templates "layouts/*"

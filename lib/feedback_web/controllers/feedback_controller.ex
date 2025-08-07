@@ -128,7 +128,13 @@ def contact(conn,_params) do
 
 def userfeedback(conn, _params) do
 
-    user=Feedback.Repo.all(Feedback.User)
+  id=get_session(conn,:user_id)
+user =
+    from(f in Feedback.User, offset: 1, where: f.user_id == ^id )
+    |> Feedback.Repo.all()
+    IO.puts("user got from id:::")
+  IO.inspect(user)
+
     render(conn, :userfeedback,user: user, first_name: "")
   end
 def getfeedbackbyid(conn,%{"id" => id}) do

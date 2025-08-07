@@ -38,15 +38,30 @@
             <a class="text-[#0d141c] text-lg font-medium" href="/contact">Contact</a>
           </nav>
           <div class="flex gap-2">
+          <%!-- <%= inspect(@conn.assigns) %> --%>
+
+         <%= if @conn.assigns[:user_id]==nil  do %>
             <a href="/signup">
               <button class="h-10 px-4 bg-[#0c7ff2] text-white font-bold rounded-lg">Sign Up</button>
             </a>
             <a href="/login">
               <button class="h-10 px-4 bg-[#e7edf4] text-[#0d141c] font-bold rounded-lg">Login</button>
             </a>
+
+        <%else %>
+
+       
+           <a href="/profile">
+      <img src="https://cdn-icons-png.flaticon.com/128/1144/1144811.png" alt="Profile" class="w-8 h-8 rounded-full" />
+    </a>
+      <%!-- <p class="text-gray-900"><%= (@conn.assigns[:fname]) || "N/A" %></p> --%>
+
             <a href="/logout">
               <button class="h-10 px-4 bg-[#e7edf4] text-[#0d141c] font-bold rounded-lg">Logout</button>
             </a>
+
+
+            <%end %>
           </div>
         </div>
       </header>

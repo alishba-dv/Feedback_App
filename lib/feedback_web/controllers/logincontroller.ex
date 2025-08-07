@@ -22,6 +22,13 @@ end
 
     end
 
+
+    def profile(conn, _params) do
+      user_id=get_session(conn,:user_id)
+      user=Repo.get!(Feedback.UserData,user_id)
+
+      render(conn,:profile,user_id: user_id,user: user)
+    end
    def loginuser(conn, %{"user" => user_params}) do
 
     email = user_params["email"]
@@ -40,12 +47,13 @@ end
   else
     matched_user = hd(matched_users)
     IO.puts("This is matched_user:: ")
-    IO.puts(matched_user.id)
+    IO.inspect(matched_user.name)
 
    if Bcrypt.verify_pass(password, matched_user.password) do
 
       conn
       |> put_session(:user_id, matched_user.id)
+      # |> put_session(:fname, "ALISHBASSIGNED")
 
       |> put_flash(:info, "Login Successful")
       |> redirect(to: "/feedback")

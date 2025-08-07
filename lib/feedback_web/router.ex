@@ -2,20 +2,25 @@ defmodule FeedbackWeb.Router do
   use FeedbackWeb, :router
 
   pipeline :browser do
+
+    plug FeedbackWeb.Plugs.FetchUserId
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, html: {FeedbackWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+
   end
 
   scope "/", FeedbackWeb do
     pipe_through :browser
+
 
     get "/", PageController, :home
 
@@ -39,6 +44,7 @@ defmodule FeedbackWeb.Router do
     get "/feedback/:id",FeedbackController, :getfeedbackbyid
     get "/loginrequired", FeedbackController, :loginrequired
     get "/logout", LoginFormController, :logout
+    get  "/profile", LoginFormController, :profile
   end
 
 
@@ -54,6 +60,7 @@ defmodule FeedbackWeb.Router do
 
     scope "/dev" do
       pipe_through :browser
+
 
       live_dashboard "/dashboard", metrics: FeedbackWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview

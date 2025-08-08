@@ -4,9 +4,12 @@ defmodule FeedbackWeb.Plugs.FetchUserId do
   def init(opts), do: opts
 
   def call(conn, _opts) do
+    conn=fetch_session(conn)
+    name = get_session(conn, :fname)
+
      conn
-  # |> assign(:fname, fetch_session(conn, :fname))
-  |> assign(:user_id, fetch_session(conn, :user_id))
+  |> assign(:name, name)
+  |> assign(:user_id, get_session(conn, :user_id))
 
   end
 end

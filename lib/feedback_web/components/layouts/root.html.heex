@@ -49,12 +49,11 @@
             </a>
 
         <%else %>
-
-       
+      
            <a href="/profile">
       <img src="https://cdn-icons-png.flaticon.com/128/1144/1144811.png" alt="Profile" class="w-8 h-8 rounded-full" />
     </a>
-      <%!-- <p class="text-gray-900"><%= (@conn.assigns[:fname]) || "N/A" %></p> --%>
+      <p class="text-gray-900"><%= (@conn.assigns[:name]) || "N/A" %></p>
 
             <a href="/logout">
               <button class="h-10 px-4 bg-[#e7edf4] text-[#0d141c] font-bold rounded-lg">Logout</button>

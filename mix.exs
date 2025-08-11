@@ -33,7 +33,7 @@ defmodule Feedback.MixProject do
   defp deps do
     [
       {:bcrypt_elixir, "~> 3.0"},
-      {:phoenix, "~> 1.7.21"},
+      {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
@@ -56,9 +56,13 @@ defmodule Feedback.MixProject do
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.26"},
-      {:jason, "~> 1.2"},
+      {:jason, "~> 1.4"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:phoenix_swagger, "~> 0.8.3"}, # swagger generator + macros
+    {:ex_json_schema, "~> 0.7.1"},   # json schema support (used by phoenix_swagger)
+    {:poison, "~> 2.2"}             # optional: if you prefer Poison as JSON lib
+
     ]
   end
 

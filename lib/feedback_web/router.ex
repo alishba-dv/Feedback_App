@@ -1,5 +1,6 @@
 defmodule FeedbackWeb.Router do
   use FeedbackWeb, :router
+ use PhoenixSwagger
 
   pipeline :browser do
 
@@ -13,17 +14,23 @@ defmodule FeedbackWeb.Router do
 
   end
 
+
+
+
+
   pipeline :api do
-    plug :accepts, ["json"]
+  plug :accepts, ["json"]
+  plug :fetch_session
 
   end
 
   scope "/", FeedbackWeb do
+
+
+
     pipe_through :browser
 
-
     get "/", PageController, :home
-
     get "/feedback", FeedbackController, :feedback
     get "/feedback/create", FeedbackController, :create
     post "/submit", SubmitController, :submit
@@ -49,6 +56,28 @@ defmodule FeedbackWeb.Router do
 
 
 
+ # Other scopes may use custom stacks.
+  scope "/api", FeedbackWeb do
+    pipe_through :api
+    get "/users",UserController, :getusers
+    post "/users",UserController, :create_user
+    delete "/users", UserController, :delete_user
+    patch "/users", UserController, :update_user
+
+  end
+
+
+
+
+  scope "/swagger" do
+  # This serves the Swagger UI at /swagger
+  forward "/", PhoenixSwagger.Plug.SwaggerUI,
+    otp_app: :feedback,
+    swagger_file: "swagger.json"
+end
+
+
+
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:feedback, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
@@ -65,5 +94,10 @@ defmodule FeedbackWeb.Router do
       live_dashboard "/dashboard", metrics: FeedbackWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+
+
   end
+
+
+
 end

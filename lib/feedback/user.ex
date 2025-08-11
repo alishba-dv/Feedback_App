@@ -1,6 +1,7 @@
 defmodule Feedback.User do
   use Ecto.Schema
   import Ecto.Changeset
+  @derive {Jason.Encoder, only: [:id, :email, :fname, :lname, :feedback]}
 
   schema "users" do
     field :email, :string

@@ -1,0 +1,248 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/api/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add a new user",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/users"
+            },
+            "description": "Created"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/create_user"
+            },
+            "required": true,
+            "name": "user",
+            "in": "body",
+            "description": "User details"
+          }
+        ],
+        "operationId": "FeedbackWeb.UserController.create_user",
+        "description": "Adds a new user in the database",
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Updates an existing user",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/users"
+            },
+            "description": "Created"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/update_user"
+            },
+            "required": true,
+            "name": "user",
+            "in": "body",
+            "description": "User details"
+          }
+        ],
+        "operationId": "FeedbackWeb.UserController.update_user",
+        "description": "Updates a user in database",
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List all users",
+        "responses": {
+          "400": {
+            "description": "bad request"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/users"
+            },
+            "description": "Success"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "operationId": "FeedbackWeb.UserController.getusers",
+        "description": "Fetches all users from the database"
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a user",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/delete_user"
+            },
+            "description": "Created"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/delete_user"
+            },
+            "required": true,
+            "name": "user",
+            "in": "body",
+            "description": "User ID"
+          }
+        ],
+        "operationId": "FeedbackWeb.UserController.delete_user",
+        "description": "Deletes  a  user in the database",
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "info": {
+    "version": "0.0.1",
+    "title": "<enter your title>"
+  },
+  "host": "localhost:4000",
+  "definitions": {
+    "users": {
+      "type": "object",
+      "title": "View Users",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "First name"
+        },
+        "id": {
+          "type": "integer",
+          "description": "ID"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email"
+        }
+      },
+      "description": "A user"
+    },
+    "update_user": {
+      "type": "object",
+      "title": "Updates User",
+      "required": [
+        "password",
+        "name",
+        "email",
+        "id"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Password"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "id": {
+          "type": "integer",
+          "description": "ID"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email"
+        }
+      },
+      "example": {
+        "password": "newpassword123",
+        "name": "Updated Name",
+        "id": 3,
+        "email": "updated@example.com"
+      },
+      "description": "Schema for updpating a new user"
+    },
+    "delete_user": {
+      "type": "object",
+      "title": "Delete User",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "id"
+        }
+      },
+      "example": {
+        "id": 3
+      },
+      "description": "A user"
+    },
+    "create_user": {
+      "type": "object",
+      "title": "Create User",
+      "required": [
+        "password",
+        "name",
+        "email"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Password"
+        },
+        "name": {
+          "type": "string",
+          "description": "First name"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email"
+        }
+      },
+      "example": {
+        "password": "newpassword123@",
+        "name": "New User",
+        "email": "new@example.com"
+      },
+      "description": "Schema for creating a new user"
+    }
+  }
+}

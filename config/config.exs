@@ -30,6 +30,13 @@ config :feedback, FeedbackWeb.Endpoint,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :feedback, Feedback.Mailer, adapter: Swoosh.Adapters.Local
+config :feedback, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      router: FeedbackWeb.Router,
+      endpoint: FeedbackWeb.Endpoint
+    ]
+  }
 
 # Configure esbuild (the version is required)
 config :esbuild,

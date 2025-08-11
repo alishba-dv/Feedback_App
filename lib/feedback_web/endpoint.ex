@@ -17,13 +17,14 @@ defmodule FeedbackWeb.Endpoint do
 
   # Serve at "/" the static files from "priv/static" directory.
   #
-  # You should set gzip to true if you are running phx.digest
+  #  You should set gzip to true if you are running phx.digest
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
     from: :feedback,
     gzip: false,
-    only: FeedbackWeb.static_paths()
+    only: FeedbackWeb.static_paths(),
+     only: ~w(css fonts images favicon.ico robots.txt swagger.json)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -50,5 +51,11 @@ defmodule FeedbackWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug FeedbackWeb.Router
-  
+
+
+#  plug PhoenixSwagger.Plug.SwaggerUI,
+#   otp_app: :Feedback,
+#   swagger_file: "swagger.json",
+#   path: "/api/swagger"
+
 end

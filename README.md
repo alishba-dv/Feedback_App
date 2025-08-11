@@ -2,7 +2,7 @@
 --> Inquora is a website designed for organizing feedbacks of users at one platform. Login users can update, view and delete their feedbacks.
 
 Here is homepage design of website:
-[text](../../../../..)
+<img width="1847" height="933" alt="Screenshot from 2025-08-11 14-53-42" src="https://github.com/user-attachments/assets/dd282d0f-502a-4dba-ab2d-7daff13d122f" />
 
 To start your Phoenix server:
 

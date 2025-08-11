@@ -1,5 +1,7 @@
 📢 Inquora
-A modern web application designed to collect, manage, and analyze user feedback efficiently.
+
+
+-- A modern web application designed to collect, manage, and analyze user feedback efficiently.
 This platform helps businesses, organizations, and individuals understand user needs, track issues, and improve products or services based on real-time responses.
 
 🚀 Features
@@ -48,7 +50,7 @@ mix ecto.migrate
 Start the application:
 
 mix phx.server
-Open your browser and visit:
+###Open your browser and visit:
 
 
 http://localhost:4000

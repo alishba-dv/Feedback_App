@@ -1,5 +1,61 @@
-# Inquora
---> Inquora is a website designed for organizing feedbacks of users at one platform. Login users can update, view and delete their feedbacks.
+📢 Inquora
+A modern web application designed to collect, manage, and analyze user feedback efficiently.
+This platform helps businesses, organizations, and individuals understand user needs, track issues, and improve products or services based on real-time responses.
+
+🚀 Features
+📝 Submit Feedback – Easy-to-use form for users to share their opinions and suggestions.
+
+📊 Feedback Dashboard – View and manage all submissions in one place.
+
+🔍 Search & Filter – Quickly find specific feedback entries.
+
+🔒 Secure Authentication – Safe and secure login for users with password hashing for security purposes
+
+
+<img width="257" height="196" alt="image" src="https://github.com/user-attachments/assets/1b4b11f5-a1da-4e14-b12d-0706291fdaba" />   Swagger User Interface (UI) implementation for responsive design for frontend/backend developers for easy and efficient testing of basic APIs of user login/signup CRUD fucntionalities
+
+
+🛠 Tech Stack
+Frontend: Phoenix LiveView / Tailwind CSS
+
+Backend: Elixir Phoenix Framework
+
+Database: PostgreSQL with Ecto
+
+Authentication: Secure password hashing with Bcrypt
+
+API Documentation: Swagger (via Phoenix Swagger)
+
+
+
+
+📦 Installation
+Clone the repository:
+
+
+git clone https://github.com/yourusername/feedback-app.git
+cd feedback-app
+Install dependencies:
+
+
+mix deps.get
+npm install --prefix assets
+Setup the database:
+
+
+mix ecto.create
+mix ecto.migrate
+Start the application:
+
+
+mix phx.server
+
+Open your browser and visit:
+
+
+http://localhost:4000
+
+
 
 Here is homepage design of website:
 <img width="1847" height="933" alt="Screenshot from 2025-08-11 14-53-42" src="https://github.com/user-attachments/assets/dd282d0f-502a-4dba-ab2d-7daff13d122f" />

@@ -1,4 +1,8 @@
 # Inquora
+--> Inquora is a website designed for organizing feedbacks of users at one platform. Login users can update, view and delete their feedbacks.
+
+Here is homepage design of website:
+[text](../../../../..)
 
 To start your Phoenix server:
 

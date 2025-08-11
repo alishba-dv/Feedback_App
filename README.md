@@ -29,14 +29,13 @@ API Documentation: Swagger (via Phoenix Swagger)
 
 
 
+## 📦 Installation
 
-📦 Installation
-Clone the repository:
+```bash
 
-
+### Clone the repository
 git clone https://github.com/yourusername/feedback-app.git
 cd feedback-app
-Install dependencies:
 
 
 mix deps.get
@@ -48,13 +47,12 @@ mix ecto.create
 mix ecto.migrate
 Start the application:
 
-
 mix phx.server
-
 Open your browser and visit:
 
 
 http://localhost:4000
+```
 
 
 

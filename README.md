@@ -11,7 +11,7 @@ This platform helps businesses, organizations, and individuals understand user n
 
 🔒 Secure Authentication – Safe and secure login for users with password hashing for security purposes
 
-<img width="10" height="10" alt="image" src="https://github.com/user-attachments/assets/fdbfd28b-b847-4cb6-af8f-6d41cd618abd" />
+<img width="20" height="20" alt="image" src="https://github.com/user-attachments/assets/fdbfd28b-b847-4cb6-af8f-6d41cd618abd" />
  Swagger User Interface (UI) implementation for responsive design for frontend/backend developers for easy and efficient testing of basic APIs of user login/signup CRUD fucntionalities
 
 
